@@ -1,12 +1,13 @@
 package e_commerce.EntreLanas.dtos;
 
 import e_commerce.EntreLanas.model.Enums.Categoria;
+import e_commerce.EntreLanas.model.vo.Dinero;
 
 public class ProductoResumenDTO {
 
     private Long id;
     private String titulo;
-    private Double precio;
+    private Dinero precio;
     private String imagen;
     private Categoria categoria;
 
@@ -15,7 +16,7 @@ public class ProductoResumenDTO {
     }
 
 
-    public ProductoResumenDTO(Long id, String titulo, Double precio, String imagen, Categoria categoria) {
+    public ProductoResumenDTO(Long id, String titulo, Dinero precio, String imagen, Categoria categoria) {
         this.id = id;
         this.titulo = titulo;
         this.precio = precio;
@@ -43,16 +44,15 @@ public class ProductoResumenDTO {
         this.titulo = titulo;
     }
 
-    
-    public Double getPrecio() {
+    public Dinero getPrecio() {
         return precio;
     }
 
 
-    public void setPrecio(Double precio) {
+    public void setPrecio(Dinero precio) {
         this.precio = precio;
     }
-
+    
 
     public String getImagen() {
         return imagen;

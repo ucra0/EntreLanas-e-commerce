@@ -1,7 +1,11 @@
 package e_commerce.EntreLanas.model;
 
 import e_commerce.EntreLanas.model.Enums.Categoria;
+import e_commerce.EntreLanas.model.vo.Dinero;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -22,8 +26,12 @@ public class Producto {
     private String titulo;
     @Column(name = "descripcion", nullable = false)
     private String descripcion;
-    @Column(name = "precio", nullable = false)
-    private Double precio;
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "importe", column = @Column(name = "precio", nullable = false, scale = 2)),
+        @AttributeOverride(name = "moneda", column = @Column(name = "moneda", nullable = false, length = 3))
+    })
+    private Dinero precio;
     @Column(name = "imagen", nullable = false)
     private String imagen;
     @Column(name = "stock", nullable = false)
@@ -38,7 +46,9 @@ public class Producto {
     }
 
 
-    public Producto(Long producto_id, String titulo, String descripcion, Double precio, String imagen, Integer stock, Categoria categoria) {
+
+    public Producto(Long producto_id, String titulo, String descripcion, Dinero precio, String imagen, Integer stock,
+            Categoria categoria) {
         this.producto_id = producto_id;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -47,6 +57,7 @@ public class Producto {
         this.stock = stock;
         this.categoria = categoria;
     }
+
 
 
     public Long getProducto_id() {
@@ -79,12 +90,12 @@ public class Producto {
     }
 
 
-    public Double getPrecio() {
+    public Dinero getPrecio() {
         return precio;
     }
 
 
-    public void setPrecio(Double precio) {
+    public void setPrecio(Dinero precio) {
         this.precio = precio;
     }
 
@@ -117,6 +128,7 @@ public class Producto {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
+
 
 
     @Override
